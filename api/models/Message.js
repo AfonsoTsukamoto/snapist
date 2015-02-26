@@ -12,6 +12,9 @@ function merge_options(obj1,obj2){
     return obj3;
 }
 
+var redis  = require('redis');
+var redisClient = redis.createClient();
+
 module.exports = {
 
   attributes: {
@@ -34,5 +37,12 @@ module.exports = {
       delete obj.createdAt;
       return obj;
     }
+  },
+  afterCreate: function(message, next){
+    var mkey = 'snapist:message:' + message.id;
+    console.log(mkey);
+    redisClient.set(mkey, message.text);
+    redisClient.expire(mkey, 30);
+    next();
   }
 };

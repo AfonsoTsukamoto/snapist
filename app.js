@@ -54,6 +54,21 @@ process.chdir(__dirname);
   }
 
 
+  (function(){
+    console.log('Got Env?');
+    try{
+      Channel.find(1)
+      .then(function(channel){
+        console.log('YEAH!!!');
+      })
+      .catch(function(err){
+        console.log('YEAHHH???');
+      })
+    }catch(bal){
+      console.log('shiiiieeettt!');
+    }
+  })();
+
   // Start server
   sails.lift(rc('sails'));
 })();
