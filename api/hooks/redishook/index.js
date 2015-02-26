@@ -1,7 +1,7 @@
 module.exports = function myHook(sails) {
 
    // This var will be private
-   var redis = require('redis');
+   var redis = require('../../../node_modules/redis');
    var RedisNotifier = require('redis-notifier');
 
    var eventNotifier = new RedisNotifier(redis, {
